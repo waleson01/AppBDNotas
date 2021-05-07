@@ -12,11 +12,24 @@ namespace AppBDNotas.Droid
     {
         protected override void OnCreate(Bundle savedInstanceState)
         {
+            TabLayoutResource = Resource.Layout.Tabbar;
+            ToolbarResource = Resource.Layout.Toolbar;
+
             base.OnCreate(savedInstanceState);
+            //criação no banco de Dados
+            string dbName = "dbAula3";
+
+            //retorno no local de armazenamento do BD
+            string dbPath = AcessoArquivo.GetLocalFilePath(dbName);
 
             Xamarin.Essentials.Platform.Init(this, savedInstanceState);
             global::Xamarin.Forms.Forms.Init(this, savedInstanceState);
-            LoadApplication(new App());
+
+            //LoadApplication(new App());
+
+            //Passagem de parametro pelo construtor da pagina do local e nome do BD
+            LoadApplication(new App(dbPath, dbName));
+
         }
         public override void OnRequestPermissionsResult(int requestCode, string[] permissions, [GeneratedEnum] Android.Content.PM.Permission[] grantResults)
         {
