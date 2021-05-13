@@ -4,9 +4,23 @@
              x:Class="AppBDNotas.View.ListarDetail">
     <ContentPage.Content>
         <StackLayout>
-            <Label Text="Welcome to Xamarin.Forms!"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
+            <StackLayout Orientation="Horizontal">
+                <Label Text="Lista de Registros de Notas" FontSize="Medium" TextColor="White" HorizontalOptions="CenterAndExpand"
+                       FontAttributes="Bold" />
+            </StackLayout>
+            <ListView x:Name="ListaNotas" HasUnevenRows="True" SeparatorColor="Red" Margin="15" BackgroundColor="White" >
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <StackLayout>
+                                <Label Text="{Binding Id,StringFormat='Codigo: {0}'}" />
+                                <Label Text="{Binding Titulo,StringFormat='Título: {0}'}" />
+                                <Label Text="{Binding Dados,StringFormat='Dados: {0}'}" />
+                            </StackLayout>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

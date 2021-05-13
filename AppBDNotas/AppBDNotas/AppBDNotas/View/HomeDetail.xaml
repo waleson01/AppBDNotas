@@ -3,10 +3,13 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="AppBDNotas.View.HomeDetail">
     <ContentPage.Content>
-        <StackLayout>
-            <Label Text="Welcome to Xamarin.Forms!"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
+        <StackLayout BackgroundColor="LightSeaGreen">
+            <StackLayout Grid.Row="1" Spacing="10" Margin="10" Padding="10" BackgroundColor="#F3F2F0">
+                <Label Text="App destinado a Conexão de Banco de Dados Local (SQLite)" HorizontalOptions="Center" FontSize="Large"
+                       FontAttributes="Bold" />
+                <Label Text="Principis operações CRUD (Create, Read, Update, Delete)" HorizontalOptions="Center" FontSize="Large"
+                       FontAttributes="Bold" />
+            </StackLayout>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

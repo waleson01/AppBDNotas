@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
+using AppBDNotas.ViewModel;
 
 namespace AppBDNotas.View
 {
@@ -15,6 +16,13 @@ namespace AppBDNotas.View
         public ListarDetail()
         {
             InitializeComponent();
+            AtualizaLista();
+        }
+
+        public void AtualizaLista()
+        {
+            ServicesBDNota dbNotas = new ServicesBDNota(App.DbPath);
+            ListaNotas.ItemsSource = dbNotas.Listar();
         }
     }
 }

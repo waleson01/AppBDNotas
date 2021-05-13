@@ -26,7 +26,7 @@ namespace AppBDNotas.Model
             this.Dados = "";
             this.Favorito = false;
             this.Titulo = "";
-                        }
+        }
 
     }
 }
