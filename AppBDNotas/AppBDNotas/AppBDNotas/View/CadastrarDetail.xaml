@@ -16,7 +16,8 @@
 
             <StackLayout Orientation="Horizontal" Margin="20,0,20,20">
                 <Button x:Name="btSalvar" Text="Inserir" Clicked="btSalvar_Clicked" HorizontalOptions="FillAndExpand" />
-                <Button x:Name="btCancelar" Text="Cancela" Clicked="btCancelar_CLicked" HorizontalOptions="FillAndExpand" />
+                <Button x:Name="btCancelar" Text="Cancelar" Clicked="btCancelar_CLicked" HorizontalOptions="FillAndExpand" />
+                <Button x:Name="btExcluir" Text="Excluir" Clicked="btExcluir_CLicked" HorizontalOptions="FillAndExpand" IsVisible="False" />
             </StackLayout>
         </StackLayout>
     </ContentPage.Content>

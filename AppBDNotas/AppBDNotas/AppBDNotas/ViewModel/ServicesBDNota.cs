@@ -67,5 +67,42 @@ namespace AppBDNotas.ViewModel
 
         }
 
+        public void Alterar(ModelNota nota)
+        {
+            try
+            {
+                if (string.IsNullOrEmpty(nota.Titulo))  //caso esteja vazio o campo Titulo
+                    throw new Exception("Titulo da nota não informado");
+
+                if (string.IsNullOrEmpty(nota.Dados)) //caso esteja vazio o campo Dados
+                    throw new Exception("Dados da nota não informados");
+
+                if (nota.Id <= 0)
+                    throw new Exception("Id da nota não informado");
+
+                //atualiza todas as colunas da tabela do objeto que estou passando.
+                int result = conn.Update(nota);
+                StatusMessage = string.Format("{0} Registros alterados.", result);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(String.Format("Erro: {0}", ex.Message));
+            }
+        }
+
+        public void Excluir(int id)
+        {
+            try
+            {
+                //recebe o id do regisro a ser deletado. se Id da table igual ao id, deleta
+                int result = conn.Table<ModelNota>().Delete(r => r.Id == id);
+                StatusMessage = string.Format("{0} Registros Deletados.", result);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(string.Format("Erro: {0}", ex.Message));
+            }
+        }
+
     }
 }

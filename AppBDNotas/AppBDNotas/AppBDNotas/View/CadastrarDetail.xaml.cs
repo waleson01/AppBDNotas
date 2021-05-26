@@ -14,9 +14,24 @@ namespace AppBDNotas.View
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class CadastrarDetail : ContentPage
     {
+        int id;
         public CadastrarDetail()
         {
             InitializeComponent();
+        }
+
+        public CadastrarDetail(ModelNota nota)
+        {
+            InitializeComponent();
+            btSalvar.Text = "Alterar";
+
+            btExcluir.IsVisible = true;
+
+            //carrega os componentes com os valores passados atrave´s do construtor
+            id = nota.Id;
+            txtTitulo.Text = nota.Titulo;
+            txtDados.Text = nota.Dados;
+            swFavorito.IsToggled = nota.Favorito;
         }
 
         private void btSalvar_Clicked(object sender, EventArgs e)
@@ -35,10 +50,12 @@ namespace AppBDNotas.View
                 }
                 else
                 {
-
+                    nota.Id = id;
+                    dbNotas.Alterar(nota);
+                    DisplayAlert("Resultado da operação", dbNotas.StatusMessage, "OK");
                 }
-                MasterDetailPage p = (MasterDetailPage)Application.Current.MainPage;
-                p.Detail = new NavigationPage(new HomeDetail());
+                Voltar();
+
             }
             catch (Exception ex)
             {
@@ -47,6 +64,27 @@ namespace AppBDNotas.View
         }
 
         private void btCancelar_CLicked(object sender, EventArgs e)
+        {
+            MasterDetailPage p = (MasterDetailPage)Application.Current.MainPage;
+            p.Detail = new NavigationPage(new HomeDetail());
+        }
+
+        private async void btExcluir_CLicked(object sender, EventArgs e)
+        {
+            //aqui pergunta para a confirmação da exclusão do registro
+            bool resp = await DisplayAlert("Excluir Registro", "Deseja Excluir a nota atual?", "Sim!", "Não!");
+
+            //se o retorno der True, o metodo excluir é chamado
+            if (resp)
+            {
+                ServicesBDNota dbNotas = new ServicesBDNota(App.DbPath);
+                dbNotas.Excluir(id);
+                await DisplayAlert("Resultado da operação", dbNotas.StatusMessage, "OK!!");
+            }
+            Voltar();
+        }
+
+        public void Voltar()
         {
             MasterDetailPage p = (MasterDetailPage)Application.Current.MainPage;
             p.Detail = new NavigationPage(new HomeDetail());
