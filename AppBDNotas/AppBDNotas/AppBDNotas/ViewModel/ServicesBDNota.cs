@@ -104,5 +104,40 @@ namespace AppBDNotas.ViewModel
             }
         }
 
+        //metodo que recebe apenas o titulo para localizar a nota
+        public List<ModelNota> Localizar (string titulo)
+        {
+            List<ModelNota> lista = new List<ModelNota>();
+            try
+            {
+                var resp = from p in conn.Table<ModelNota>() 
+                           where p.Titulo.ToLower().Contains(titulo.ToLower()) 
+                           select p;
+                lista = resp.ToList();
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(string.Format("Erro: {0}", ex.Message));
+            }
+            return lista;
+        }
+
+        //Mostrar para listar apenas os favoritos
+        public List<ModelNota> ListarFavoritos()
+        {
+            List<ModelNota> lista = new List<ModelNota>();
+            try
+            {
+                var resp = from p in conn.Table<ModelNota>() 
+                           where p.Favorito == true 
+                           select p;
+                lista = resp.ToList();
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(string.Format("Erro: {0}", ex.Message));
+            }
+            return lista;
+        }
     }
 }

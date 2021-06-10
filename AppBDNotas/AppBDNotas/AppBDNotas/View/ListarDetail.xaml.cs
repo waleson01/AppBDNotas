@@ -33,5 +33,39 @@ namespace AppBDNotas.View
             MasterDetailPage p = (MasterDetailPage)Application.Current.MainPage;
             p.Detail = new NavigationPage(new CadastrarDetail(nota));
         }
+
+        private void SwFavorito_Toggle(object sender, ToggledEventArgs e)
+        {
+            //criação do objeto da classe SErvicesBDNota
+            ServicesBDNota dbNotas = new ServicesBDNota(App.DbPath);
+
+            //açaõ de quando do control switch estiver selecionado
+            if (swFavorito.IsToggled)
+            {
+                ListaNotas.ItemsSource = dbNotas.ListarFavoritos();
+            }
+            else //ação de qdo do control switch NÃO estiver selecionado
+            {
+                //faz a busca pela lista inteira
+                AtualizaLista();
+            }
+        }
+
+        private void BtLocalizar_Clicked(object sender, EventArgs e)
+        {
+            String titulo = ""; //captura do texto da busca
+            if (txtNota.Text != null) titulo = txtNota.Text;
+            ServicesBDNota dbNotas = new ServicesBDNota(App.DbPath);
+
+            //chamada do metodo de busca por título da nota
+            ListaNotas.ItemsSource = dbNotas.Localizar(titulo);
+            txtNota.Text = ""; //limpa o Text
+        }
+
+        private void BtTodos_Clicked(object sender, EventArgs e)
+        {
+            //retorna a lista inteira
+            AtualizaLista();
+        }
     }
 }

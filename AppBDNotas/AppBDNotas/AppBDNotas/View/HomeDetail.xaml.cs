@@ -16,5 +16,17 @@ namespace AppBDNotas.View
         {
             InitializeComponent();
         }
+
+        private void tapGestureRecognizer_cadastrar(object sender, EventArgs e)
+        {
+            MasterDetailPage p = (MasterDetailPage)Application.Current.MainPage;
+            p.Detail = new NavigationPage(new CadastrarDetail());
+        }
+
+        private void tapGestureRecognizer_pesquisar(object sender, EventArgs e)
+        {
+            MasterDetailPage p = (MasterDetailPage)Application.Current.MainPage;
+            p.Detail = new NavigationPage(new ListarDetail());
+        }
     }
 }

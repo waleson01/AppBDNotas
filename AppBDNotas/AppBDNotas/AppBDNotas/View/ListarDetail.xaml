@@ -1,13 +1,26 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="AppBDNotas.View.ListarDetail">
+             x:Class="AppBDNotas.View.ListarDetail" BackgroundColor="LightSeaGreen" Title="Lista de Notas">
     <ContentPage.Content>
         <StackLayout>
-            <StackLayout Orientation="Horizontal" BackgroundColor="LightSeaGreen">
+            <StackLayout Orientation="Horizontal">
                 <Label Text="Lista de Registros de Notas" FontSize="Medium" TextColor="White" HorizontalOptions="CenterAndExpand"
                        FontAttributes="Bold" />
             </StackLayout>
+            
+            <StackLayout Orientation="Horizontal">
+                <Label Text="Exibir apenas as notas favoritas: " FontSize="Medium" TextColor="White" HorizontalOptions="CenterAndExpand"
+                       FontAttributes="Bold" />
+                <Switch x:Name="swFavorito" HorizontalOptions="End" Toggled="SwFavorito_Toggle" />
+            </StackLayout>
+
+             <StackLayout Orientation="Horizontal">
+                <Entry x:Name="txtNota" Keyboard="Plain" Placeholder="Titulo da nota" HorizontalOptions="StartAndExpand" />
+                <Button x:Name="btLocalizar" Text="Localizar" Clicked="BtLocalizar_Clicked" />
+                <Button x:Name="btTodos" Text="Todos" Clicked="BtTodos_Clicked" />
+            </StackLayout>
+                
             <ListView x:Name="ListaNotas" HasUnevenRows="True" SeparatorColor="Red" Margin="15" BackgroundColor="White"
                       ItemSelected="ListaNotas_ItemSelected">
                 <ListView.ItemTemplate>
